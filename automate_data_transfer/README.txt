@@ -69,3 +69,7 @@ Ensure a requirements.txt file is present on ROOT directory and this should avoi
 """! [remote rejected] master -> master (pre-receive hook declined)"""
 This error happened when first running 'git push heroku master' as heroku could not
 identify buildpack. 
+
+# ---- Data Storage with AWS S3 Buckets
+Data will saved, read and modified from an S3 Buckets
+Once bucket is created, create access point -> choose VPC for lower costs.
