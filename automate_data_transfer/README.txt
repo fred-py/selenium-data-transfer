@@ -73,3 +73,15 @@ identify buildpack.
 # ---- Data Storage with AWS S3 Buckets
 Data will saved, read and modified from an S3 Buckets
 Once bucket is created, create access point -> choose VPC for lower costs.
+
+
+# --->>> AWS LAMBDA FUNCTIONS
+This may be used instead of Heroku.
+
+1. Create custom lambda function eg. download_csv
+2. Select trigger event: EventBridge(CloudWatch Events)
+3. Select create new rule
+4. Rule type: Schedule expression
+    rate expression is easy to set up eg: rate(2 hours) runs every 2 hours
+    for more control and customisation use cron 
+5. Click add
