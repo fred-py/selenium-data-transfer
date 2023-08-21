@@ -1,8 +1,12 @@
-#!/Users/frederico/automate_wordpress_package/venv/bin/python
+#https://saturncloud.io/blog/how-to-write-csv-files-to-amazon-s3-using-python/
+#https://boto3.amazonaws.com/v1/documentation/api/latest/guide/s3-example-creating-buckets.html
+import logging
+import boto3
+from botocore.exceptions import ClientError
+import os
+from aws_keys import access_keys, secret_keys
+import zipfile
 
-
-"""Selenium Indexed Documentation""" 
-#https://selenium-python.readthedocs.io/
 
 from selenium import webdriver
 from selenium.webdriver.support.ui import WebDriverWait
@@ -89,38 +93,56 @@ def download(driver): # Called from log_in function
     d.click()
 
 
-schedule.every(2).hours.at(":02").do(log_in)
-schedule.every(2).hours.at(":04").do(extract_file)
-schedule.every(2).hours.at(":06").do(submit_new_requests)
+
+# Get the downloaded file's path within the dyno's filesystem
+# This will depend on the browser and its capabilities
+def locate_heroku_download(driver):
+    downloaded_file_path = driver.capabilities['moz:profile'] + '/downloads/filename.csv'
+    return downloaded_file_path
 
 
-while True:
-    schedule.run_pending()
-    time.sleep(5)
+# Configure AWS Credentials
+s3 = boto3.resource(
+    's3',
+    aws_access_key_id=access_keys,
+    aws_secret_access_key=secret_keys 
+)
 
-#log_in()
-#extract_file()
-#time.sleep(5)
-#submit_new_requests()
+# Print list of bucket names
+for bucket in s3.buckets.all():
+    print(bucket.name)
 
+s3_resource = boto3.resource('s3')
+bucket_name = 'selenium-wordpress-united'
 
+# File name
+object_key = None
+#csv_obj = s3_resource.get_object(Bucket=bucket_name, Key=object_key)
+#body = csv_obj['Body']
+#csv_string = body.read().decode('utf-8')
 
+def upload_file(file_name, bucket, object_name=None):
+    """Upload a file to an S3 bucket
 
-""" Testing if login was successful
-Enter the wrong credentials on the login 
-page to inspect HTML for the error message"""
-# Wait for the page to load after login
-##WebDriverWait(driver=driver, timeout=10).until(
-##    lambda x: x.execute_script("return document.readyState === 'complete'")
-##)
-##error_message = "The password you entered for the username"
-# Get error if any
-##errors = driver.find_elements("css selector", "login_error")
-# print the errors optionally
-##for e in errors:
-##    print(e.text)
-# if we find that error message within errors, then login is failed
-##if any(error_message in e.text for e in errors):
-##    print("[!] Login failed")
-##else:
-##    print("[+] Login successful")
+    :param file_name: File to upload
+    :param bucket: Bucket to upload to
+    :param object_name: S3 object name. If not specified then file_name is used
+    :return: True if file was uploaded, else False
+    """
+
+    # If S3 object_name was not specified, use file_name
+    if object_name is None:
+        object_name = os.path.basename(file_name)
+    
+    # Upload the file
+    s3_client = boto3.client('s3')
+    try:
+        response = s3_client.upload_file(file_name, bucket, object_name)
+    except ClientError as e:
+        logging.error(e)
+        return False
+    return True # Script does not return true
+
+file = ("*.zip")
+
+upload_file()

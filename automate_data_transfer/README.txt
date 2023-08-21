@@ -13,6 +13,11 @@ Webdriver Elements Finder Documentation
 Selenium Index - Complete Walkthrough With Examples
 https://selenium-python.readthedocs.io/
 
+
+-->>> TESTING SELENIUM WITH PYTEST
+https://github.com/SeleniumHQ/seleniumhq.github.io/blob/trunk/examples/python/tests/waits/test_waits.py
+
+
 Modules/packadges
 1. pip install selenium
 2. pip install chromedriver-py (other options available)
@@ -38,7 +43,7 @@ __Docker, CI(Continuous Integration) *GREAT READ AND instructions
 https://realpython.com/python-continuous-integration/#what-is-continuous-integration
 
 
-
+***CLOUD SET UP AND DEPLOYMENT***
 #---- HEROKU SET UP AND DEPLOYMENT
 
 https://devcenter.heroku.com/articles/procfile
@@ -63,12 +68,22 @@ Run the following commands:
 >>>heroku login  # Log in to your Heroku account
 >>>heroku create your-app-name  # Replace 'your-app-name' with your desired app name
 
-Configure Buildpacks:
-
+Configure Buildpacks: 
 Ensure a requirements.txt file is present on ROOT directory and this should avoid error 
 """! [remote rejected] master -> master (pre-receive hook declined)"""
 This error happened when first running 'git push heroku master' as heroku could not
 identify buildpack. 
+
+https://devcenter.heroku.com/articles/heroku-cli-commands
+
+# Set up Background Tasks in Python with RQ (Redis Queue)
+*** This is needed in order to run *worker dyno in Procfile to run main script
+Follow instructions on link below:
+https://devcenter.heroku.com/articles/python-rq
+
+
+
+
 
 # ---- Data Storage with AWS S3 Buckets
 Data will saved, read and modified from an S3 Buckets
