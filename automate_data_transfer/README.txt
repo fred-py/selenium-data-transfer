@@ -76,6 +76,9 @@ identify buildpack.
 
 https://devcenter.heroku.com/articles/heroku-cli-commands
 
+#** Configure Heroku to run worker dyno instead of default web dyno
+>>>heroku ps:scale worker=1
+
 # Set up Background Tasks in Python with RQ (Redis Queue)
 *** This is needed in order to run *worker dyno in Procfile to run main script
 Follow instructions on link below:

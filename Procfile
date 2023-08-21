@@ -1,1 +1,1 @@
-worker: python main.py
+worker: python automate_data_transfer/main.py
