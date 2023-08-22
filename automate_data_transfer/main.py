@@ -9,7 +9,8 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.by import By
 from selenium.webdriver.firefox.options import Options # Set up the drive to handle downloads.
 from selenium.webdriver.support import expected_conditions as EC
-from wordpress_keys import username, password
+import os
+#from wordpress_keys import username, password
 import time
 # Imports for file_handling.py
 import schedule
@@ -31,8 +32,8 @@ options.set_preference("browser.helperApps.neverAsk.saveToDisk", "application/cs
 
 
 # Wordpress credentials
-user = username
-key = password  
+user = os.environ["USER"]
+key = os.environ["KEY"]  
 
 
 

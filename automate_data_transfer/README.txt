@@ -77,10 +77,18 @@ identify buildpack.
 https://devcenter.heroku.com/articles/heroku-cli-commands
 
 #** Configure Heroku to run worker dyno instead of default web dyno
+
+On Procfile add: worker: python path_to_main_file/main.py
+Deploy again Git push heroku...
+*NOTE: Since main is not on root directory the file path must be added on Procfile
+In this case root is automate_wordpress_package and main.py is in automate_data_transfer
+so ---> worker: python automate_data_transfer/main.py 
 >>>heroku ps:scale worker=1
 
+
+
 # Set up Background Tasks in Python with RQ (Redis Queue)
-*** This is needed in order to run *worker dyno in Procfile to run main script
+*** This may be needed (NOT SURE AT THIS STAGE) in order to run *worker dyno in Procfile to run main script
 Follow instructions on link below:
 https://devcenter.heroku.com/articles/python-rq
 
