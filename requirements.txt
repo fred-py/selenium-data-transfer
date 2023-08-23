@@ -1,6 +1,7 @@
 # https://realpython.com/what-is-pip/#using-requirements-files
 appnope>=0.1.3
 boto3>=1.28.28
+firefox
 #rq>=1.15.1
 asttokens>=2.2.1
 attrs>=23.1.0

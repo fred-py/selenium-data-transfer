@@ -85,6 +85,14 @@ In this case root is automate_wordpress_package and main.py is in automate_data_
 so ---> worker: python automate_data_transfer/main.py 
 >>>heroku ps:scale worker=1
 
+# Set up enviroment variables on Heroku
+On terminal
+>>>heroku config:set USER=username
+>>>heroku config:set KEY=password
+
+To access key variables on script:
+>>>user = os.environ["USER"]
+>>>key = os.environ["KEY"]
 
 
 # Set up Background Tasks in Python with RQ (Redis Queue)
