@@ -22,6 +22,8 @@ from foward_estimates import submit_new_requests
 
 options = Options() # Create a new options folder
 options.add_argument("--headless") # Run headless
+# enable trace level for debugging 
+options.log.level = "trace"
 
 # Set the download directory and disable the download prompt
 options.set_preference("browser.download.folderList", 2) #  Use custom download directory
@@ -90,19 +92,19 @@ def download(driver): # Called from log_in function
     d.click()
 
 
-schedule.every(2).hours.at(":02").do(log_in)
-schedule.every(2).hours.at(":04").do(extract_file)
-schedule.every(2).hours.at(":06").do(submit_new_requests)
+#schedule.every(2).hours.at(":02").do(log_in)
+#schedule.every(2).hours.at(":04").do(extract_file)
+#schedule.every(2).hours.at(":06").do(submit_new_requests)
 
 
-while True:
-    schedule.run_pending()
-    time.sleep(5)
+#while True:
+#    schedule.run_pending()
+#    time.sleep(5)
 
-#log_in()
-#extract_file()
-#time.sleep(5)
-#submit_new_requests()
+log_in()
+extract_file()
+time.sleep(5)
+submit_new_requests()
 
 
 

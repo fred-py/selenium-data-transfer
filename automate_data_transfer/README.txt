@@ -106,6 +106,12 @@ In this case root is automate_wordpress_package and main.py is in automate_data_
 so ---> worker: python automate_data_transfer/main.py 
 >>>heroku ps:scale worker=1
 
+# Set up stack or migrate to a New Stack
+https://devcenter.heroku.com/articles/stack
+Firefox and geckodriver are only compatible with heroku-20< New Stack. 
+To set/migrate:
+>>>heroku stack:set heroku-22
+
 # Set up enviroment variables on Heroku
 On terminal
 >>>heroku config:set USER=username
