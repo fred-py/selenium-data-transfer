@@ -67,6 +67,27 @@ Run the following commands:
 
 >>>heroku login  # Log in to your Heroku account
 >>>heroku create your-app-name  # Replace 'your-app-name' with your desired app name
+#-->> Install firefox and geckodriver 
+>>>heroku buildpacks:add https://github.com/pyronlaboratory/heroku-integrated-firefox-geckodriver
+
+Update Heroku's environment variables to store the following path strings.
+s.heroku.com/buildpacks/pyronlaboratory/hero
+FIREFOX_BIN: /app/vendor/firefox/firefox
+
+Alternatively, you can even use /app/vendor/firefox/firefox-bin
+
+GECKODRIVER_PATH: /app/vendor/geckodriver/geckodriver
+
+LD_LIBRARY_PATH: /usr/local/lib:/usr/lib:/lib:/app/vendor
+
+PATH: /usr/local/bin:/usr/bin:/bin:/app/vendor/
+
+These configuration variables can be updated via Heroku CLI as follows:
+
+Executable command: 
+>>>heroku config:set <ENV_VARIABLE>=<ABSOLUTE_PATH>
+
+
 
 Configure Buildpacks: 
 Ensure a requirements.txt file is present on ROOT directory and this should avoid error 
